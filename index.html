@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current time</title>
+</head>
+
+<body>
+
+    <div id="displayTime" style="text-align: center;">
+        <h1> Behold, the current time (updated every second):</h1>
+    </div>
+
+    <script>
+        // Declare variables to be used below
+        let selectDiv = document.getElementById("displayTime");
+        let createPara = document.createElement("p");
+
+        /* Use setInterval() function to pull current time info once every second. Use "async" with the "await" commands
+        to ensure that everything works in the correct sequence and that each request waits for the one before it to return a result before starting. */
+        let getTime = setInterval(async () => {
+            /* Get current date, which includes the current time, and is returned as an object with year, month, day
+            etc as values. Use the following website to learn this:
+             https://tecadmin.net/get-current-date-time-javascript/ */
+            let today = await new Date();
+            // Specify that I only want to see the hours, minutes and seconds values from the object
+            let time = await today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            // Write time to paragraph
+            createPara.innerHTML = time;
+            // Style text
+            createPara.style.fontSize = "80px";
+            createPara.style.color = "green";
+
+            // Add / append paragraph to parent div
+            selectDiv.appendChild(createPara);
+
+            // Delay/interval of 1 second between each iteration 
+        }, 1000)
+
+        // Call getTime function
+        getTime();
+    </script>
+
+</body>
+
+</html>
